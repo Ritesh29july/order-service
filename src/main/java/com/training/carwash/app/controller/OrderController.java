@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.training.carwash.app.model.Order;
+import com.training.carwash.app.model.OrderPlace;
 import com.training.carwash.app.service.OrderService;
 
 
@@ -35,9 +35,9 @@ public class OrderController {
 
 
   @GetMapping("order/")
-  public ResponseEntity<List<Order>> getOrderDetails() {
+  public ResponseEntity<List<OrderPlace>> getOrderDetails() {
 
-    List<Order> list = orderService.getOrderDetails();
+    List<OrderPlace> list = orderService.getOrderDetails();
     // Order list = bookingService.getOrderDetails();
 
     log.info("inside method " + list);
@@ -45,7 +45,7 @@ public class OrderController {
   }
 
   @PostMapping("order/")
-  public ResponseEntity<HttpStatus> receiveEvent(@RequestBody Order Order) {
+  public ResponseEntity<HttpStatus> receiveEvent(@RequestBody OrderPlace Order) {
     boolean processed = true;
     orderService.saveOrderDetails(Order);
     return new ResponseEntity<>(processed ? HttpStatus.OK : HttpStatus.NO_CONTENT);
@@ -59,17 +59,18 @@ public class OrderController {
   }
 
   @PutMapping("/order/{id}")
-  public ResponseEntity<Order> updateOrder(@PathVariable("id") long id, @RequestBody Order order) {
-    Optional<Order> orderData = orderService.findById(id);
+  public ResponseEntity<OrderPlace> updateOrder(@PathVariable("id") long id,
+      @RequestBody OrderPlace order) {
+    Optional<OrderPlace> orderData = orderService.findById(id);
 
     if (orderData.isPresent()) {
-      Order _order = orderData.get();
+      OrderPlace _order = orderData.get();
 
       _order.setAddress(order.getAddress());
       _order.setCarPlateNumber(order.getCarPlateNumber());
       _order.setContactNumber(order.getContactNumber());
       _order.setDescription(order.getDescription());
-      _order.setName(order.getScheduleDate());
+      _order.setName(order.getName());
       _order.setScheduleDate(order.getScheduleDate());
       _order.setStatus(order.getStatus());
 

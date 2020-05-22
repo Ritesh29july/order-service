@@ -14,11 +14,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Order {
+public class OrderPlace {
+
   @Id
-  @Column(name = "orderId")
+  @Column(name = "order_id")
   @GeneratedValue
   private Long orderId;
+
   private String name;
   private String address;
   private String carPlateNumber;

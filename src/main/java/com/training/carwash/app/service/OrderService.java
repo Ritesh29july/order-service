@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.training.carwash.app.model.Order;
+import com.training.carwash.app.model.OrderPlace;
 import com.training.carwash.app.repository.OrderRepository;
 
 @Service
@@ -25,11 +25,11 @@ public class OrderService {
     this.orderRepository = OrderRepository;
   }
 
-  public List<Order> getOrderDetails() {
+  public List<OrderPlace> getOrderDetails() {
     return orderRepository.findAll();
   }
 
-  public void saveOrderDetails(Order Order) {
+  public void saveOrderDetails(OrderPlace Order) {
     orderRepository.save(Order);
   }
 
@@ -37,12 +37,12 @@ public class OrderService {
     orderRepository.deleteById(id);
   }
 
-  public Order updateOrder(Order _Order) {
+  public OrderPlace updateOrder(OrderPlace _Order) {
 
     return orderRepository.save(_Order);
   }
 
-  public Optional<Order> findById(long id) {
+  public Optional<OrderPlace> findById(long id) {
     return orderRepository.findById(id);
   }
 }
